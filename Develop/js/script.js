@@ -8,20 +8,12 @@ var twoPm = $("#hour-14");
 var threePm = $("#hour-15");
 var fourPm = $("#hour-16");
 var fivePm = $("#hour-17");
-//Will wait for the page to completely Load
-  $(document).ready(readyFunction)
-function readyFunction(){
-  console.log(readyFunction)
-}
-$(window).on("Load",readyFunction)
-console.log(readyFunction)
-
 //Shall return What day it is the currentDay/Month/Year + Hour/MM/SS
 var today = function(){return dayjs().format('DD/MM/YYYY')};
 document.getElementById("currentDay").innerText=today();
 var currentHour = dayjs().format('h:mm:ss a');
 var interval = setInterval(function() {
-var now = dayjs();
+var now = dayjs().hour();
 $('#currentDay').html(today() + " " + dayjs().format('hh:mm:ss A'));
 },100);
 
@@ -29,12 +21,7 @@ $('#currentDay').html(today() + " " + dayjs().format('hh:mm:ss A'));
 //gets hour
 
 
-function saveStorage(){
-   $(".saveBtn").on("click",function(){
-    currentHour.JSON.parse(localStorage.setItem("currentHour"))
-   }
-   )
-}
+
 
 function init(){
 console.log("Current Hour " + currentHour);
@@ -66,8 +53,36 @@ var init5 = JSON.parse(localStorage.getItem("05:00 pm"))
 fivePm.val(init5);
 } 
 
-$(".saveBtn").on("click",function(){
-  console.log($(this).attr("data-key"));
+function backgroundActions(){
+  //Past,Present,Future
+  //form control to display the data value which are bounded because they are hidden
+  $(".form-control").each(function(){
+    var time = parseInt($(this).attr("id"));
+    now = parseInt(now);
+    console.log(time);
+    console.log(now);
+    if(now>time){
+        $(this).addClass("past");
+      } else if (now<time){
+        $(this).addClass("future");
+      } else{
+        $(this).addClass("present");
+      }
+    }
+  )
+}
+$(document).ready(function(){
+  //Load These When the page is done loading
+  init();
+  backgroundActions();
+  //ButtonFunction Test
+  $(".saveBtn").on("click",function(){
+
+  }
+)
+$('#clearDay').on('click',function(){
+
 })
-$('#clearDay').on('click')
+}
 //past/present/future
+)
