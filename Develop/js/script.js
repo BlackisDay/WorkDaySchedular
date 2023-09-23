@@ -68,13 +68,13 @@ function backgroundActions(){
     console.log(now)
     if(now>time){
       console.log(now>time)
-      $(this).removeClass("present")
+      $(this).removeClass(" ")
         $(this).addClass("past");
       } else if (now<time){
-        $(this).removeClass("future","past")
+        $(this).removeClass(" ")
         $(this).addClass("future");
       } else{
-        $(this).removeClass("past")
+        $(this).removeClass("past","future")
         $(this).addClass("present");
       }
     }
