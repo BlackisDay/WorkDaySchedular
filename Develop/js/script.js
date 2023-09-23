@@ -1,4 +1,7 @@
+//Loads everything when page finishes loading
 $(document).ready(function(){
+  //alerts you when page finishes loading 
+  alert("Page Finished Loading")
 //Time and Days
 var nineAm = $("#hour-9");
 var tenAm = $("#hour-10");
@@ -14,8 +17,8 @@ var today = function(){return dayjs().format('DD/MM/YYYY')};
 document.getElementById("currentDay").innerText=today();
 var currentHour = dayjs().format('h:mm:ss a');
 var now = dayjs().hour();
+//Constantly updates with this interval
 var interval = setInterval(function() {
-
 $('#currentDay').html(today() + " " + dayjs().format('hh:mm:ss A'));
 },100);
 
@@ -68,13 +71,13 @@ function backgroundActions(){
     console.log(now)
     if(now>time){
       console.log(now>time)
-      $(this).removeClass(" ")
+        $(this).removeClass("past present future")
         $(this).addClass("past");
       } else if (now<time){
-        $(this).removeClass(" ")
+        $(this).removeClass("past present future")
         $(this).addClass("future");
       } else{
-        $(this).removeClass("past","future")
+        $(this).removeClass("past present future")
         $(this).addClass("present");
       }
     }
@@ -85,14 +88,17 @@ function backgroundActions(){
   //Load These When the page is done loading
   init();
   backgroundActions();
-
   //ButtonFunction Test
   $(".saveBtn").on("click",function(){
+    var save = localStorage;
+    save.setItem("data-key","text")
+    save.getItem("data-key")
 
   }
 )
 $('#clearDay').on('click',function(){
-
+  localStorage.clear();
+  init();
 })
 }
 //past/present/future
