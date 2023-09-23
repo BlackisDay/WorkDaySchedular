@@ -1,3 +1,4 @@
+$(document).ready(function(){
 //Time and Days
 var nineAm = $("#hour-9");
 var tenAm = $("#hour-10");
@@ -12,8 +13,9 @@ var fivePm = $("#hour-17");
 var today = function(){return dayjs().format('DD/MM/YYYY')};
 document.getElementById("currentDay").innerText=today();
 var currentHour = dayjs().format('h:mm:ss a');
-var interval = setInterval(function() {
 var now = dayjs().hour();
+var interval = setInterval(function() {
+
 $('#currentDay').html(today() + " " + dayjs().format('hh:mm:ss A'));
 },100);
 
@@ -53,28 +55,37 @@ var init5 = JSON.parse(localStorage.getItem("05:00 pm"))
 fivePm.val(init5);
 } 
 
+
 function backgroundActions(){
   //Past,Present,Future
   //form control to display the data value which are bounded because they are hidden
-  $(".form-control").each(function(){
-    var time = parseInt($(this).attr("id"));
+  //Grab each ID,Split off hour- from ID, So i can compare time
+  //var x = split("-,6,7");
+  //x;
+  $(".time-block").each(function(){
+    var time = parseInt($(this).attr("id").split("-")[1]);
     now = parseInt(now);
-    console.log(time);
-    console.log(now);
+    console.log(now)
     if(now>time){
+      console.log(now>time)
+      $(this).removeClass("present")
         $(this).addClass("past");
       } else if (now<time){
+        $(this).removeClass("future","past")
         $(this).addClass("future");
       } else{
+        $(this).removeClass("past")
         $(this).addClass("present");
       }
     }
   )
 }
-$(document).ready(function(){
+
+
   //Load These When the page is done loading
   init();
   backgroundActions();
+
   //ButtonFunction Test
   $(".saveBtn").on("click",function(){
 
