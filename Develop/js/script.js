@@ -18,10 +18,15 @@ document.getElementById("currentDay").innerText=today();
 var currentHour = dayjs().format('h:mm:ss a');
 var now = dayjs().hour();
 //Constantly updates with this interval
+
+
+//interval is setting the Interval and the format
+//Not doing interval; will still work meaning you can just use var interval =
+//And it will still work. Commenting out var interval will just stop
 var interval = setInterval(function() {
 $('#currentDay').html(today() + " " + dayjs().format('hh:mm:ss A'));
 },100);
-
+interval;
 //init
 //gets hour
 
@@ -90,10 +95,10 @@ function backgroundActions(){
   backgroundActions();
   //ButtonFunction Test
   $(".saveBtn").on("click",function(){
+    var value = $(this).siblings('.description').val();
+    var time = $(this).parent().attr('id');
     var save = localStorage;
-    save.setItem("data-key","text")
-    save.getItem("data-key")
-
+    save.setItem(time,value)
   }
 )
 $('#clearDay').on('click',function(){
@@ -101,5 +106,5 @@ $('#clearDay').on('click',function(){
   init();
 })
 }
-//past/present/future
+
 )
